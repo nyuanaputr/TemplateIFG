@@ -15,9 +15,25 @@
 
     <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 
+    <style type="text/css">
+
+        #viz {
+            width: 860px;
+            height: 510px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
+
+    </style>
+
+    <!-- FIXME: load from dist -->
+    <script src="js/neovis.js"></script>
+
+    <script src="graph.js"></script>
+
 </head>
 
-<body class="top-navigation">
+<body class="top-navigation" onload="draw()">
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
             <div id="header"></div>
@@ -90,7 +106,7 @@
                             <h5> Entity Resolution</h5>
                         </div>
                         <div class="ibox-content">
-
+                            <div id="viz"></div>
                         </div>
                     </div>
                 </div>
@@ -422,6 +438,27 @@
     <script src="js/plugins/pace/pace.min.js"></script>
 
     <script src="scripts.js"></script>
+
+    <script>
+        $("#reload").click(function() {
+    
+            var cypher = $("#cypher").val();
+    
+            if (cypher.length > 3) {
+                viz.renderWithCypher(cypher);
+            } else {
+                console.log("reload");
+                viz.reload();
+    
+            }
+    
+        });
+    
+        $("#stabilize").click(function() {
+            viz.stabilize();
+        })
+    
+    </script>
  
 
 </body>
